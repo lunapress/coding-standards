@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace OnepixStandard\Sniffs\Declarations;
+namespace WpOnepixStandard\Sniffs\Declarations;
 
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;

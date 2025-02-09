@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace OnepixStandard\Tests\Declarations;
+namespace WpOnepixStandard\Tests\Declarations;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * @covers \OnepixStandard\Sniffs\Declarations\StrictTypesSniff
+ * @covers \WpOnepixStandard\Sniffs\Declarations\StrictTypesSniff
  */
 class StrictTypesUnitTest extends AbstractSniffUnitTest
 {

@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "OnepixStandard\\": "OnepixStandard/"
+            "WpOnepixStandard\\": "WpOnepixStandard/"
         }
     },
     "autoload-dev": {
@@ -41,7 +41,7 @@
         }
     },
     "scripts": {
-        "test:phpcs": "phpunit -c phpunit.xml --coverage-filter OnepixStandard",
+        "test:phpcs": "phpunit -c phpunit.xml --coverage-filter WpOnepixStandard",
         "check": [
             "@test:phpcs"
         ]

@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace OnepixStandard\Tests\WP;
+namespace WpOnepixStandard\Tests\WP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
 
 /**
- * @covers \OnepixStandard\Sniffs\WP\AbspathAfterNamespaceSniff
+ * @covers \WpOnepixStandard\Sniffs\WP\AbspathAfterNamespaceSniff
  */
 class AbspathAfterNamespaceUnitTest extends AbstractSniffUnitTest
 {
