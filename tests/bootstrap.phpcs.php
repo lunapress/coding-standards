@@ -1,4 +1,5 @@
 <?php
+
 require __DIR__ . '/../vendor/autoload.php';
 
 $GLOBALS['PHP_CODESNIFFER_STANDARD_DIRS'] = [];

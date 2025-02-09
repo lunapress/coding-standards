@@ -5,4 +5,5 @@
 /.gitignore export-ignore
 /.editorconfig export-ignore
 /phpunit.xml.dist export-ignore
-/phpunit export-ignore
+/phpunit.xml export-ignore
+/ruleset.xml export-ignore

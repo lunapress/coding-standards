@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace WpOnepixStandard\Sniffs\WP;
@@ -33,9 +34,8 @@ class AbspathAfterNamespaceSniff implements Sniff
 
     public function process(
         File $phpcsFile,
-             $stackPtr
-    ): void
-    {
+        $stackPtr
+    ): void {
         $namespaceEnd = $phpcsFile->findEndOfStatement($stackPtr);
 
         $startPosition = $namespaceEnd + 1;
@@ -56,9 +56,8 @@ class AbspathAfterNamespaceSniff implements Sniff
 
     private function findDefinedABSPATHSequence(
         File $phpcsFile,
-        int  $position
-    ): bool
-    {
+        int $position
+    ): bool {
         $tokens = $phpcsFile->getTokens();
         $currentPosition = $position;
 
