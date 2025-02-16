@@ -79,7 +79,10 @@
 
     <!-- Arguments -->
     <arg name="extensions" value="php" />
-    <arg name="colors"/>
+    <arg name="report" value="summary" />
+    <arg name="colors" />
+    <arg name="cache" />
+    <arg value="sp" />
     <exclude-pattern>*/psalm/*</exclude-pattern>
     <exclude-pattern>*/vendor/*</exclude-pattern>
 </ruleset>
