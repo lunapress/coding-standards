@@ -73,10 +73,6 @@
 
     <rule ref="Squiz.NamingConventions.ValidVariableName"/>
 
-    <!-- WpOnepixStandard rules -->
-    <rule ref="WpOnepixStandard.Declarations" />
-    <rule ref="WpOnepixStandard.WP" />
-
     <!-- Arguments -->
     <arg name="extensions" value="php" />
     <arg name="report" value="summary" />
