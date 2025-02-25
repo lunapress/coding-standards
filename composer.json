@@ -41,12 +41,14 @@
         }
     },
     "scripts": {
-        "fix:cs": "phpcbf --standard=./ruleset.xml",
-        "check:cs": "phpcs --standard=./ruleset.xml",
+        "check:cs": "phpcs",
         "check:test": "phpunit -c phpunit.xml --coverage-filter WpOnepixStandard",
+        "check:static": "psalm",
         "check": [
             "@check:cs",
+            "@check:static",
             "@check:test"
-        ]
+        ],
+        "fix:cs": "phpcbf"
     }
 }

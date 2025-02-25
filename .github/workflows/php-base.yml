@@ -1,0 +1,40 @@
+name: PHP Base Template
+
+on:
+  workflow_call:
+    inputs:
+      php-version:
+        required: true
+        type: string
+      coverage:
+        required: false
+        type: string
+        default: 'none'
+      command:
+        required: false
+        type: string
+        default: 'echo "No command"'
+
+jobs:
+  setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ inputs.php-version }}
+          coverage: ${{ inputs.coverage }}
+          tools: composer
+
+      - uses: actions/cache@v4
+        with:
+          path: vendor
+          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+
+      - run: composer install --no-progress --prefer-dist
+
+      - name: Run custom command
+        run: ${{ inputs.command }}
