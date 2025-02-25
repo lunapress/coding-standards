@@ -42,13 +42,16 @@
     },
     "scripts": {
         "check:cs": "phpcs",
-        "check:test": "phpunit -c phpunit.xml --coverage-filter WpOnepixStandard",
         "check:static": "psalm",
         "check": [
             "@check:cs",
             "@check:static",
-            "@check:test"
+            "@unit"
         ],
-        "fix:cs": "phpcbf"
+        "fix:cs": "phpcbf",
+        "unit:standard": "phpunit -c phpunit.xml --coverage-filter WpOnepixStandard",
+        "unit": [
+            "@unit:standard"
+        ]
     }
 }

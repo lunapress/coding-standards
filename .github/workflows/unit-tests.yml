@@ -1,0 +1,19 @@
+name: Unit tests
+
+on:
+  push:
+    branches: [main, dev]
+    paths-ignore: ["**.md", "docs/**"]
+  pull_request:
+    paths-ignore: ["**.md", "docs/**"]
+
+jobs:
+  unit-tests:
+    strategy:
+      matrix:
+        php: ["8.1", "8.2", "8.3"]
+    uses: ./.github/workflows/php-base.yml
+    with:
+      php-version: ${{ matrix.php }}
+      command: composer unit
+      coverage: 'xdebug'
