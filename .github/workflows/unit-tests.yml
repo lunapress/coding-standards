@@ -17,3 +17,22 @@ jobs:
       php-version: ${{ matrix.php }}
       command: composer tests
       coverage: 'xdebug'
+      artifact-path: 'coverage-unit.xml'
+      php-version-artifact: '8.1'
+
+  coverage:
+    needs: unit-tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-8.1
+
+      - name: Upload coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: coverage-unit.xml

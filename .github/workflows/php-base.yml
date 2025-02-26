@@ -14,6 +14,14 @@ on:
         required: false
         type: string
         default: 'echo "No command"'
+      artifact-path:
+        required: false
+        type: string
+        default: ''
+      php-version-artifact:
+        required: false
+        type: string
+        default: ''
 
 jobs:
   setup:
@@ -38,3 +46,10 @@ jobs:
 
       - name: Run custom command
         run: ${{ inputs.command }}
+
+      - name: Upload artifacts
+        if: ${{ (inputs.artifact-path != '') && (inputs.php-version == inputs.php-version-artifact) }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ inputs.php-version-artifact }}
+          path: ${{ inputs.artifact-path }}

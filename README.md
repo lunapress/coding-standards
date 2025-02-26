@@ -1,4 +1,12 @@
-[![Latest Stable Version](http://poser.pugx.org/onepix/wp-coding-standards/v)](https://packagist.org/packages/onepix/wp-coding-standards) [![Total Downloads](http://poser.pugx.org/onepix/wp-coding-standards/downloads)](https://packagist.org/packages/onepix/wp-coding-standards) [![Latest Unstable Version](http://poser.pugx.org/onepix/wp-coding-standards/v/unstable)](https://packagist.org/packages/onepix/wp-coding-standards) [![License](http://poser.pugx.org/onepix/wp-coding-standards/license)](https://packagist.org/packages/onepix/wp-coding-standards) [![PHP Version Require](http://poser.pugx.org/onepix/wp-coding-standards/require/php)](https://packagist.org/packages/onepix/wp-coding-standards)
+<p align="center">
+    <img src="https://img.shields.io/badge/PHP-%3E%3D8.1-8892BF?logo=php"  alt="PHP Version"/>
+    <img src="https://img.shields.io/badge/psalm-level%201-blue"  alt="Psalm level"/>
+    <a href="https://packagist.org/packages/onepix/wp-coding-standards"><img src="https://img.shields.io/packagist/v/onepix/wp-coding-standards" alt="Latest Stable Version"></a>
+    <a href="https://packagist.org/packages/onepix/wp-coding-standards"><img src="https://img.shields.io/packagist/dt/onepix/wp-coding-standards" alt="Total Downloads"></a>
+    <img src="https://img.shields.io/github/actions/workflow/status/onepixnet/wp-coding-standards/unit-tests.yml"  alt="Unit tests"/>
+</p>
+
+![Coverage](https://coveralls.io/repos/github/onepixnet/wp-coding-standards/badge.svg?branch=main)
 
 # WP Coding Standards
 
