@@ -2,10 +2,14 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$GLOBALS['PHP_CODESNIFFER_STANDARD_DIRS'] = [];
-$GLOBALS['PHP_CODESNIFFER_TEST_DIRS'] = [];
-$GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'] = [];
-$GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'] = [];
+/** @var array<string, string> $standardDirs */
+$standardDirs = [];
+/** @var array<string, string> $testDirs */
+$testDirs = [];
+/** @var array<string, bool> $sniffCodes */
+$sniffCodes = [];
+/** @var array<string, bool> $fixableCodes */
+$fixableCodes = [];
 
 $srcPath = __DIR__ . '/../WpOnepixStandard/';
 $testPath = __DIR__ . '/../WpOnepixStandard/Tests/';
@@ -13,8 +17,12 @@ $testPath = __DIR__ . '/../WpOnepixStandard/Tests/';
 $allTestFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($testPath));
 $testFiles = new RegexIterator($allTestFiles, '/Test\.php$/');
 
+/** @var SplFileInfo $file */
 foreach ($testFiles as $file) {
     $content = file_get_contents($file->getPathname());
+    if (!is_string($content)) {
+        continue;
+    }
 
     if (preg_match('/namespace\s+([^;]+);/', $content, $matches)) {
         $namespace = $matches[1];
@@ -27,9 +35,14 @@ foreach ($testFiles as $file) {
 
         $fullClassName = $namespace ? $namespace . '\\' . $className : $className;
 
-        $GLOBALS['PHP_CODESNIFFER_STANDARD_DIRS'][$fullClassName] = $srcPath;
-        $GLOBALS['PHP_CODESNIFFER_TEST_DIRS'][$fullClassName] = $testPath;
+        $standardDirs[$fullClassName] = $srcPath;
+        $testDirs[$fullClassName] = $testPath;
     }
 }
+
+$GLOBALS['PHP_CODESNIFFER_STANDARD_DIRS'] = $standardDirs;
+$GLOBALS['PHP_CODESNIFFER_TEST_DIRS'] = $testDirs;
+$GLOBALS['PHP_CODESNIFFER_SNIFF_CODES'] = $sniffCodes;
+$GLOBALS['PHP_CODESNIFFER_FIXABLE_CODES'] = $fixableCodes;
 
 require __DIR__ . '/../vendor/squizlabs/php_codesniffer/tests/bootstrap.php';

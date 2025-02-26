@@ -1,0 +1,8 @@
+<?php
+
+define('T_DOC_COMMENT_OPEN_TAG', 1);
+define('T_OPEN_PARENTHESIS', 1);
+define('T_EQUAL', 1);
+define('T_COMMA', 1);
+define('T_CLOSE_PARENTHESIS', 1);
+define('T_SEMICOLON', 1);

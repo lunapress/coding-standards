@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace WpOnepixStandard\Tests\Declarations;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use WpOnepixStandard\Sniffs\Declarations\StrictTypesSniff;
 
-/**
- * @covers \WpOnepixStandard\Sniffs\Declarations\StrictTypesSniff
- */
-class StrictTypesUnitTest extends AbstractSniffUnitTest
+#[CoversClass(StrictTypesSniff::class)]
+final class StrictTypesUnitTest extends AbstractSniffUnitTest
 {
+    #[\Override]
     public function getWarningList(): array
     {
         return [];
     }
 
+    #[\Override]
     protected function getErrorList(string $testFile = ''): array
     {
         return match ($testFile) {

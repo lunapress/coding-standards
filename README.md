@@ -1,3 +1,5 @@
+[![Latest Stable Version](http://poser.pugx.org/onepix/wp-coding-standards/v)](https://packagist.org/packages/onepix/wp-coding-standards) [![Total Downloads](http://poser.pugx.org/onepix/wp-coding-standards/downloads)](https://packagist.org/packages/onepix/wp-coding-standards) [![Latest Unstable Version](http://poser.pugx.org/onepix/wp-coding-standards/v/unstable)](https://packagist.org/packages/onepix/wp-coding-standards) [![License](http://poser.pugx.org/onepix/wp-coding-standards/license)](https://packagist.org/packages/onepix/wp-coding-standards) [![PHP Version Require](http://poser.pugx.org/onepix/wp-coding-standards/require/php)](https://packagist.org/packages/onepix/wp-coding-standards)
+
 # WP Coding Standards
 
 Based on [wp-coding-standards/wpcs](https://github.com/WordPress/WordPress-Coding-Standards).

@@ -7,7 +7,7 @@ namespace WpOnepixStandard\Sniffs\Declarations;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
-class StrictTypesSniff implements Sniff
+final class StrictTypesSniff implements Sniff
 {
     private const ERROR_MESSAGE = 'declare(strict_types=1); required';
     private const STRICT_TYPES_VALUE = '1';
@@ -15,6 +15,7 @@ class StrictTypesSniff implements Sniff
     /**
      * @return array<int> Array of tokens to listen for
      */
+    #[\Override]
     public function register(): array
     {
         return [T_OPEN_TAG];
@@ -24,6 +25,7 @@ class StrictTypesSniff implements Sniff
      * @param File $phpcsFile The file being scanned
      * @param int $stackPtr The position in the stack where the token was found
      */
+    #[\Override]
     public function process(File $phpcsFile, $stackPtr): void
     {
         // Check if PHP open tag is the first token in file
@@ -31,6 +33,7 @@ class StrictTypesSniff implements Sniff
             return;
         }
 
+        /** @var array<int, array{code: int, content?: string, comment_closer?: int}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $declarePosition = $phpcsFile->findNext(T_DECLARE, $stackPtr);
 
@@ -59,14 +62,17 @@ class StrictTypesSniff implements Sniff
      */
     private function validateEmptyLines(File $phpcsFile, int $stackPtr, int $declarePosition): void
     {
+        /** @var array<int, array{code: int, content?: string, comment_closer?: int}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $currentPosition = $stackPtr + 1;
 
         while ($currentPosition < $declarePosition) {
             // Skip comments
             if ($tokens[$currentPosition]['code'] === T_DOC_COMMENT_OPEN_TAG) {
-                $currentPosition = $tokens[$currentPosition]['comment_closer'] + 1;
-                continue;
+                if (isset($tokens[$currentPosition]['comment_closer'])) {
+                    $currentPosition = $tokens[$currentPosition]['comment_closer'] + 1;
+                    continue;
+                }
             }
             if ($tokens[$currentPosition]['code'] === T_COMMENT) {
                 $currentPosition++;
@@ -76,7 +82,7 @@ class StrictTypesSniff implements Sniff
             // Check only for empty lines
             if (
                 $tokens[$currentPosition]['code'] === T_WHITESPACE
-                && $tokens[$currentPosition]['content'] === "\n"
+                && isset($tokens[$currentPosition]['content']) && $tokens[$currentPosition]['content'] === "\n"
                 && $tokens[$currentPosition + 1]['code'] === T_WHITESPACE
             ) {
                 $fix = $phpcsFile->addFixableError(
@@ -102,10 +108,14 @@ class StrictTypesSniff implements Sniff
      */
     private function getDeclareTokens(File $phpcsFile, int $declarePosition): ?array
     {
+        /** @var array<int, array{parenthesis_closer?: int}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $openParenthesis = $phpcsFile->findNext(T_OPEN_PARENTHESIS, $declarePosition);
 
-        if ($openParenthesis === false || !isset($tokens[$openParenthesis]['parenthesis_closer'])) {
+        if (
+            $openParenthesis === false
+            || !isset($tokens[$openParenthesis]['parenthesis_closer'])
+        ) {
             return null;
         }
 
@@ -130,17 +140,29 @@ class StrictTypesSniff implements Sniff
         );
 
         if ($fix) {
+            /** @var array<int, array{code: int, content?: string, comment_closer?: int}> $tokens */
             $tokens = $phpcsFile->getTokens();
             $nextToken = $phpcsFile->findNext(T_WHITESPACE, $stackPtr + 1, null, true);
 
+            $insertPosition = $stackPtr;
+
             if ($tokens[$nextToken]['code'] === T_DOC_COMMENT_OPEN_TAG) {
-                $insertPosition = $tokens[$nextToken]['comment_closer'] + 1;
-            } else {
-                $insertPosition = $stackPtr;
+                if (isset($tokens[$nextToken]['comment_closer'])) {
+                    $insertPosition = $tokens[$nextToken]['comment_closer'] + 1;
+                }
             }
 
             $content = "declare(strict_types=1);\n";
-            if (!isset($tokens[$insertPosition + 1]) || $tokens[$insertPosition + 1]['content'] !== "\n") {
+
+            $addExtraNewline = false;
+            if (isset($tokens[$insertPosition + 1])) {
+                $nextToken = $tokens[$insertPosition + 1];
+
+                if (isset($nextToken['content']) && $nextToken['content'] !== "\n") {
+                    $addExtraNewline = true;
+                }
+            }
+            if ($addExtraNewline) {
                 $content .= "\n";
             }
 
@@ -152,7 +174,7 @@ class StrictTypesSniff implements Sniff
      * Validates that declare statement has strict_types=1
      *
      * @param File $phpcsFile The file being scanned
-     * @param array<string, mixed> $tokens Token stack
+     * @param array<int, array{code: int, content?: string, comment_closer?: int}> $tokens Token stack
      * @param array{open: int, close: int} $declareTokens Positions of parentheses
      * @param int $declarePosition Position of declare keyword
      */
@@ -178,7 +200,7 @@ class StrictTypesSniff implements Sniff
     /**
      * Checks if declare statement has valid strict_types=1
      *
-     * @param array<string, mixed> $tokens Token stack
+     * @param array<int, array{code: int, content?: string, comment_closer?: int}> $tokens Token stack
      * @param array{open: int, close: int} $declareTokens Positions of parentheses
      * @return bool True if strict_types=1 is present and valid
      */
@@ -195,14 +217,15 @@ class StrictTypesSniff implements Sniff
     /**
      * Finds position of strict_types token in declare statement
      *
-     * @param array<string, mixed> $tokens Token stack
+     * @param array<int, array{code: int, content?: string, comment_closer?: int}> $tokens Token stack
      * @param array{open: int, close: int} $declareTokens Positions of parentheses
      * @return int|null Position of strict_types or null if not found
      */
     private function findStrictTypesPosition(array $tokens, array $declareTokens): ?int
     {
         for ($i = $declareTokens['open']; $i < $declareTokens['close']; $i++) {
-            if ($tokens[$i]['code'] === T_STRING && $tokens[$i]['content'] === 'strict_types') {
+            $token = $tokens[$i];
+            if ($token['code'] === T_STRING && isset($token['content']) && $token['content'] === 'strict_types') {
                 return $i;
             }
         }
@@ -212,7 +235,7 @@ class StrictTypesSniff implements Sniff
     /**
      * Checks if strict_types has valid value (1)
      *
-     * @param array<string, mixed> $tokens Token stack
+     * @param array<int, array{code: int, content?: string, comment_closer?: int}> $tokens Token stack
      * @param int $strictTypePos Position of strict_types token
      * @param int $closePos Position of closing parenthesis
      * @return bool True if value is 1
@@ -224,8 +247,9 @@ class StrictTypesSniff implements Sniff
             if ($tokens[$equalPos]['code'] === T_EQUAL) {
                 $valuePos = $equalPos + 1;
                 while ($valuePos < $closePos) {
-                    if ($tokens[$valuePos]['code'] === T_LNUMBER) {
-                        return $tokens[$valuePos]['content'] === self::STRICT_TYPES_VALUE;
+                    $token = $tokens[$valuePos];
+                    if ($token['code'] === T_LNUMBER && isset($token['content'])) {
+                        return $token['content'] === self::STRICT_TYPES_VALUE;
                     }
                     $valuePos++;
                 }
@@ -244,6 +268,7 @@ class StrictTypesSniff implements Sniff
      */
     private function fixStrictTypes(File $phpcsFile, array $declareTokens): void
     {
+        /** @var array<int, array{code: int, content?: string, comment_closer?: int}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $fixer = $phpcsFile->fixer;
 

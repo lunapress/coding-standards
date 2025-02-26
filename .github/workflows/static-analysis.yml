@@ -1,4 +1,4 @@
-name: Unit tests
+name: Static analysis
 
 on:
   push:
@@ -8,12 +8,11 @@ on:
     paths-ignore: ["**.md", "docs/**"]
 
 jobs:
-  unit-tests:
+  coding-standards:
     strategy:
       matrix:
         php: ["8.1", "8.2", "8.3"]
     uses: ./.github/workflows/php-base.yml
     with:
       php-version: ${{ matrix.php }}
-      command: composer tests
-      coverage: 'xdebug'
+      command: composer check:static

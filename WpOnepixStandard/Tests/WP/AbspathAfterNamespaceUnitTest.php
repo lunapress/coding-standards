@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace WpOnepixStandard\Tests\WP;
 
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;
+use PHPUnit\Framework\Attributes\CoversClass;
+use WpOnepixStandard\Sniffs\WP\AbspathAfterNamespaceSniff;
 
-/**
- * @covers \WpOnepixStandard\Sniffs\WP\AbspathAfterNamespaceSniff
- */
-class AbspathAfterNamespaceUnitTest extends AbstractSniffUnitTest
+#[CoversClass(AbspathAfterNamespaceSniff::class)]
+final class AbspathAfterNamespaceUnitTest extends AbstractSniffUnitTest
 {
+    #[\Override]
     public function getWarningList(): array
     {
         return [];
     }
 
+    #[\Override]
     protected function getErrorList(string $testFile = ''): array
     {
         return match ($testFile) {

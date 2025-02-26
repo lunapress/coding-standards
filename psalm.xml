@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<psalm
+        resolveFromConfigFile="true"
+        checkForThrowsDocblock="true"
+        checkForThrowsInGlobalScope="true"
+        ensureArrayStringOffsetsExist="true"
+        errorLevel="1"
+
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="WpOnepixStandard"/>
+        <directory name="tests"/>
+        <ignoreFiles allowMissingFiles="true">
+            <directory name="vendor"/>
+            <directory name=".phpunit.cache"/>
+            <directory name=".devcontainer"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+<!--        <PossiblyUnusedProperty errorLevel="suppress" />-->
+        <PossiblyUnusedMethod errorLevel="suppress" />
+<!--        <UnusedProperty errorLevel="suppress" />-->
+
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <directory name="WpOnepixStandard"/>
+            </errorLevel>
+        </UnusedClass>
+
+<!--        <PropertyNotSetInConstructor>-->
+<!--            <errorLevel type="suppress">-->
+<!--                <directory name="tests"/>-->
+<!--            </errorLevel>-->
+<!--        </PropertyNotSetInConstructor>-->
+
+<!--        <MissingThrowsDocblock>-->
+<!--            <errorLevel type="suppress">-->
+<!--                <directory name="tests"/>-->
+<!--            </errorLevel>-->
+<!--        </MissingThrowsDocblock>-->
+    </issueHandlers>
+
+    <stubs>
+        <file name="stubs/phpcs.stubphp" />
+    </stubs>
+
+    <extraFiles >
+        <directory name="vendor/squizlabs/php_codesniffer/src"/>
+    </extraFiles>
+</psalm>

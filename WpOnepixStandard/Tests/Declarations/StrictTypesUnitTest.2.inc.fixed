@@ -7,4 +7,3 @@
  * @package Plugin
  */
 declare(strict_types=1);
-

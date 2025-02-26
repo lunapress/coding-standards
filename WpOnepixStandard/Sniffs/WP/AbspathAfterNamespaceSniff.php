@@ -7,7 +7,7 @@ namespace WpOnepixStandard\Sniffs\WP;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
-class AbspathAfterNamespaceSniff implements Sniff
+final class AbspathAfterNamespaceSniff implements Sniff
 {
     private const REQUIRED_CONSTANT = "'ABSPATH'";
     private const EXPECTED_SEQUENCE = [
@@ -27,11 +27,13 @@ class AbspathAfterNamespaceSniff implements Sniff
         T_SEMICOLON
     ];
 
+    #[\Override]
     public function register(): array
     {
         return [T_NAMESPACE];
     }
 
+    #[\Override]
     public function process(
         File $phpcsFile,
         $stackPtr
@@ -58,6 +60,7 @@ class AbspathAfterNamespaceSniff implements Sniff
         File $phpcsFile,
         int $position
     ): bool {
+        /** @var array<int, array{code: int, content?: string, comment_closer?: int}> $tokens */
         $tokens = $phpcsFile->getTokens();
         $currentPosition = $position;
 
@@ -82,17 +85,19 @@ class AbspathAfterNamespaceSniff implements Sniff
             }
 
             // Additional content checks for specific tokens
-            switch ($expectedTokenCode) {
-                case T_STRING:
-                    if (strtolower($currentToken['content']) !== 'defined') {
-                        return false;
-                    }
-                    break;
-                case T_CONSTANT_ENCAPSED_STRING:
-                    if ($currentToken['content'] !== self::REQUIRED_CONSTANT) {
-                        return false;
-                    }
-                    break;
+            if (isset($currentToken['content'])) {
+                switch ($expectedTokenCode) {
+                    case T_STRING:
+                        if (strtolower($currentToken['content']) !== 'defined') {
+                            return false;
+                        }
+                        break;
+                    case T_CONSTANT_ENCAPSED_STRING:
+                        if ($currentToken['content'] !== self::REQUIRED_CONSTANT) {
+                            return false;
+                        }
+                        break;
+                }
             }
 
             $currentPosition++;
