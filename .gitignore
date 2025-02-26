@@ -12,3 +12,5 @@
 !/.idea/codeStyles/
 !/.idea/inspectionProfiles/
 !/.idea/runConfigurations/
+
+coverage*.xml
