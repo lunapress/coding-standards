@@ -6,3 +6,5 @@ define('T_EQUAL', 1);
 define('T_COMMA', 1);
 define('T_CLOSE_PARENTHESIS', 1);
 define('T_SEMICOLON', 1);
+define('T_CLASS', 1);
+define('T_ANON_CLASS', 1);

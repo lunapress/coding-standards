@@ -53,7 +53,7 @@
 
         "fix:cs": "phpcbf",
 
-        "tests:unit": "phpunit -c phpunit.xml --coverage-filter WpOnepixStandard --coverage-clover=coverage-unit.xml",
+        "tests:unit": "phpunit -c phpunit.xml --coverage-filter WpOnepixStandard",
         "tests": [
             "@tests:unit"
         ]

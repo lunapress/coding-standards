@@ -5,6 +5,7 @@
         checkForThrowsInGlobalScope="true"
         ensureArrayStringOffsetsExist="true"
         errorLevel="1"
+        noCache="true"
 
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="https://getpsalm.org/schema/config"
