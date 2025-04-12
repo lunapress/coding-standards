@@ -39,8 +39,9 @@ final class AbspathAfterNamespaceSniff implements Sniff
         $stackPtr
     ): void {
         $namespaceEnd = $phpcsFile->findEndOfStatement($stackPtr);
+        $lastUseEnd = $this->findLastUseAfterNamespace($phpcsFile, $namespaceEnd);
+        $startPosition = ($lastUseEnd ?? $namespaceEnd) + 1;
 
-        $startPosition = $namespaceEnd + 1;
         $found = $this->findDefinedABSPATHSequence($phpcsFile, $startPosition);
 
         if (!$found) {
@@ -51,7 +52,7 @@ final class AbspathAfterNamespaceSniff implements Sniff
             );
 
             if ($fix) {
-                $this->applyFix($phpcsFile, $namespaceEnd);
+                $this->applyFix($phpcsFile, $startPosition - 1);
             }
         }
     }
@@ -104,6 +105,23 @@ final class AbspathAfterNamespaceSniff implements Sniff
         }
 
         return true;
+    }
+
+    private function findLastUseAfterNamespace(File $phpcsFile, int $namespaceEnd): ?int
+    {
+        $tokens = $phpcsFile->getTokens();
+        $currentPosition = $namespaceEnd + 1;
+        $lastUseEnd = null;
+
+        while ($nextUse = $phpcsFile->findNext(T_USE, $currentPosition, null, false, null, true)) {
+            if (!empty($tokens[$nextUse]['conditions'])) {
+                break;
+            }
+            $lastUseEnd = $phpcsFile->findEndOfStatement($nextUse);
+            $currentPosition = $lastUseEnd + 1;
+        }
+
+        return $lastUseEnd;
     }
 
     private function applyFix(File $phpcsFile, int $namespaceEnd): void

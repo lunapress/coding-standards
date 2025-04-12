@@ -21,8 +21,11 @@ final class AbspathAfterNamespaceUnitTest extends AbstractSniffUnitTest
     protected function getErrorList(string $testFile = ''): array
     {
         return match ($testFile) {
-            'AbspathAfterNamespaceUnitTest.1.inc', 'AbspathAfterNamespaceUnitTest.3.inc', => [
+            'AbspathAfterNamespaceUnitTest.1.inc', => [
                 3 => 1
+            ],
+            'AbspathAfterNamespaceUnitTest.3.inc', => [
+                4 => 1
             ],
             default => [],
         };

@@ -1,9 +1,12 @@
 <?php
+declare( strict_types=1 );
 
-namespace OnepixStandard\Tests\WP;
+namespace FoodSpot\Plugin\Core\Util;
 
-defined('ABSPATH') || exit;
+use function get_current_screen;
+use function is_admin;
+use function defined;
 
-use Test;
+use WP_Screen;
 
 defined('ABSPATH') || exit;
