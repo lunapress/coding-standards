@@ -7,6 +7,11 @@ use function array_reverse;
 $arr = range(1, 10);
 $key = \key($arr);
 
+function myFunction()
+{
+
+}
+
 function () use ($arr) {
     $keys = array_keys($arr);
     $key = key($keys);

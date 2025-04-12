@@ -2,8 +2,11 @@
 
 namespace ImportInternalFunction;
 
+use function Array_Keys;
+use function Array_Rand;
+use function Count;
+use function MT_rand;
 use function array_keys;
-use function array_rand;
 use function count;
 use function mt_rand;
 use function range;

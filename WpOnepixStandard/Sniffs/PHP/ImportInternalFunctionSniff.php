@@ -13,7 +13,6 @@ use WpOnepixStandard\Helper\NamespacesTrait;
 use function in_array;
 use function sort;
 use function sprintf;
-use function strtolower;
 
 use const T_DOUBLE_COLON;
 use const T_FUNCTION;
@@ -35,18 +34,12 @@ final class ImportInternalFunctionSniff implements Sniff
     public array $exclude = [];
 
     /**
-     * @var array Hash map of all php built in function names.
-     */
-    private array $builtInFunctions;
-
-    /**
      * @var array<string, array{name: string, fqn: string, ptr: int}> $importedFunctions
      */
     private array $importedFunctions = [];
 
     public function __construct()
     {
-        $this->builtInFunctions = $this->getBuiltInFunctions();
     }
 
     /**
@@ -98,7 +91,7 @@ final class ImportInternalFunctionSniff implements Sniff
                 );
 
                 foreach ($this->importedFunctions as $func) {
-                    $fqn = strtolower($func['fqn'] ?? '');
+                    $fqn = $func['fqn'] ?? '';
 
                     if (in_array($fqn, $this->exclude, true)) {
                         $error = 'Function %s cannot be imported';
@@ -149,10 +142,7 @@ final class ImportInternalFunctionSniff implements Sniff
             return null;
         }
 
-        $content = isset($tokens[$stackPtr]['content']) ? strtolower($tokens[$stackPtr]['content']) : '';
-        if (! isset($this->builtInFunctions[$content])) {
-            return null;
-        }
+        $content = $tokens[$stackPtr]['content'] ?? '';
 
         $prev = $phpcsFile->findPrevious(
             Tokens::$emptyTokens + [T_NS_SEPARATOR => T_NS_SEPARATOR],
@@ -193,7 +183,7 @@ final class ImportInternalFunctionSniff implements Sniff
                     $phpcsFile->fixer->replaceToken($prev, '');
                 }
             } elseif (isset($this->importedFunctions[$content]['fqn'])) {
-                if (strtolower($this->importedFunctions[$content]['fqn']) === $content) {
+                if ($this->importedFunctions[$content]['fqn'] === $content) {
                     $error = 'FQN for PHP internal function "%s" is not needed here, function is already imported';
                     $data = [
                         $content,

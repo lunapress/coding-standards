@@ -4,6 +4,7 @@ namespace ImportInternalFunction;
 
 use function array_keys;
 use function count;
+use function myFunction;
 use function range;
 
 $arr = range(1, 10);

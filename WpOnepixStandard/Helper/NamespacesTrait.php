@@ -7,12 +7,9 @@ namespace WpOnepixStandard\Helper;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 
-use function array_flip;
-use function get_defined_functions;
 use function in_array;
 use function ltrim;
 use function strrchr;
-use function strtolower;
 use function strtoupper;
 use function substr;
 
@@ -64,9 +61,9 @@ trait NamespacesTrait
             if (
                 $tokens[$nextToken]['code'] === T_STRING
                 && isset($tokens[$nextToken]['content'])
-                && in_array(strtolower($tokens[$nextToken]['content']), ['const', 'function'], true)
+                && in_array($tokens[$nextToken]['content'], ['const', 'function'], true)
             ) {
-                $useType = strtolower($tokens[$nextToken]['content']);
+                $useType = $tokens[$nextToken]['content'];
 
                 // increase token
                 $nextToken = (int) $nextToken;
@@ -100,7 +97,7 @@ trait NamespacesTrait
                 $alias = $this->getAliasFromName($name);
             }
 
-            $imports[$useType][$useType === 'const' ? strtoupper($alias) : strtolower($alias)] = [
+            $imports[$useType][$useType === 'const' ? strtoupper($alias) : $alias] = [
                 'name' => $alias,
                 'fqn' => $name,
                 'ptr' => $use,
@@ -140,12 +137,5 @@ trait NamespacesTrait
         } while (isset($tokens[++$stackPtr]));
 
         return ltrim($class, '\\');
-    }
-
-    private function getBuiltInFunctions(): array
-    {
-        $allFunctions = get_defined_functions();
-
-        return array_flip($allFunctions['internal']);
     }
 }

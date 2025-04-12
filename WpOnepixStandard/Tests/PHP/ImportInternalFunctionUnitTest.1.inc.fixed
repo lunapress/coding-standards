@@ -1,7 +1,7 @@
 <?php
 
 namespace A {
-use function count;
+use function Count;
 use function range;
     $arr = range(1, 10);
     $count = Count($arr);
@@ -17,15 +17,15 @@ use function count;
 
 namespace C {
 use function count;
-    use function Range;
+    use function range;
 
     $arr = range(1, 10);
     $count = count($arr);
 }
 
 namespace D {
-use function count;
-    use function range;
+use function Count;
+    use function Range;
 
     $arr = Range(1, 10);
     $count = Count($arr);

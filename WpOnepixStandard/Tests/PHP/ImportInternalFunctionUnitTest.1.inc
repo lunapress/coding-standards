@@ -13,14 +13,14 @@ namespace B {
 }
 
 namespace C {
-    use function Range;
+    use function range;
 
     $arr = \range(1, 10);
     $count = count($arr);
 }
 
 namespace D {
-    use function range;
+    use function Range;
 
     $arr = Range(1, 10);
     $count = \Count($arr);

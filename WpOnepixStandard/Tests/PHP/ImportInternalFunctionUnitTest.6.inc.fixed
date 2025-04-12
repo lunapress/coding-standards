@@ -1,0 +1,11 @@
+<?php
+
+namespace Test;
+
+use function get_current_screen;
+
+class Screen {
+    public static function test(): void {
+        $screen = get_current_screen();
+    }
+}
