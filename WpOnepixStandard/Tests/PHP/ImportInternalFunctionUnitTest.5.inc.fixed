@@ -2,11 +2,10 @@
 
 namespace ImportInternalFunction;
 
+
 use function array_keys;
 use function myFunction;
 use function range;
-
-
 $arr = range(1, 10);
 $key = key($arr);
 

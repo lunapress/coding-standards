@@ -27,4 +27,66 @@ final class UseStatement
 
         return true;
     }
+
+    public static function findLastUseAfterNamespace(File $phpcsFile, int $namespaceEnd): ?int
+    {
+        /** @var array<int, array{code: int, content?: string, comment_closer?: int, scope_opener?: int, scope_closer?: int}> $tokens */
+        $tokens = $phpcsFile->getTokens();
+        $currentPosition = $namespaceEnd + 1;
+        $lastUseEnd = null;
+
+        while ($nextUse = $phpcsFile->findNext(T_USE, $currentPosition, null, false, null, true)) {
+            if (!empty($tokens[$nextUse]['conditions'])) {
+                break;
+            }
+            $lastUseEnd = $phpcsFile->findEndOfStatement($nextUse);
+            $currentPosition = $lastUseEnd + 1;
+        }
+
+        return $lastUseEnd;
+    }
+
+    public static function findLastUseFunctionAfterNamespace(File $phpcsFile, int $namespaceEnd): ?int
+    {
+        /** @var array<int, array{code: int, content?: string, comment_closer?: int, scope_opener?: int, scope_closer?: int}> $tokens */
+        $tokens = $phpcsFile->getTokens();
+        $currentPosition = $namespaceEnd + 1;
+        $lastUseFunctionEnd = null;
+
+        while ($nextUse = $phpcsFile->findNext(T_USE, $currentPosition, null, false, null, true)) {
+            if (!empty($tokens[$nextUse]['conditions'])) {
+                break;
+            }
+
+            $nextToken = $phpcsFile->findNext(T_WHITESPACE, $nextUse + 1, null, true);
+            $end = $phpcsFile->findEndOfStatement($nextUse);
+
+            if ($tokens[$nextToken]['code'] === T_FUNCTION) {
+                $lastUseFunctionEnd = $end;
+            }
+
+            $currentPosition = $end + 1;
+        }
+
+        return $lastUseFunctionEnd;
+    }
+
+    public static function findLastUseFunctionInScope(File $phpcsFile, int $scopeOpener, int $scopeCloser): ?int
+    {
+        /** @var array<int, array{code: int, content?: string, comment_closer?: int, scope_opener?: int, scope_closer?: int}> $tokens */
+        $tokens = $phpcsFile->getTokens();
+        $lastUse = null;
+
+        for ($i = $scopeOpener + 1; $i < $scopeCloser; $i++) {
+            if ($tokens[$i]['code'] === T_USE) {
+                // Check if it's a function use statement
+                $nextToken = $phpcsFile->findNext(T_WHITESPACE, $i + 1, null, true);
+                if ($tokens[$nextToken]['code'] === T_FUNCTION) {
+                    $lastUse = $phpcsFile->findEndOfStatement($i);
+                }
+            }
+        }
+
+        return $lastUse;
+    }
 }

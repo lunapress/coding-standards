@@ -9,6 +9,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
 use PHP_CodeSniffer\Util\Tokens;
 use PHPCSUtils\BackCompat\Helper;
 use WpOnepixStandard\Helper\NamespacesTrait;
+use WpOnepixStandard\Helper\UseStatement;
 
 use function in_array;
 use function sort;
@@ -243,32 +244,68 @@ final class ImportInternalFunctionSniff implements Sniff
     /**
      * @param string[] $functionNames
      */
-    private function importFunctions(File $phpcsFile, int $namespacePtr, array $functionNames): void
+    private function importFunctions(File $phpcsFile, int $namespacePosition, array $functionNames): void
     {
-        if (! $functionNames) {
+        if (empty($functionNames)) {
             return;
         }
 
-        sort($functionNames);
+        /** @var array<int, array{code: int, content?: string, comment_closer?: int, scope_opener?: int, scope_closer?: int}> $tokens */
+        $tokens = $phpcsFile->getTokens();
+        $namespaceToken = $tokens[$namespacePosition];
 
+        sort($functionNames);
         $phpcsFile->fixer->beginChangeset();
 
-        /** @var array<int, array{code: int, content?: string, comment_closer?: int, scope_opener?: int}> $tokens */
-        $tokens = $phpcsFile->getTokens();
-        if (isset($tokens[$namespacePtr]['scope_opener'])) {
-            $ptr = $tokens[$namespacePtr]['scope_opener'];
-        } else {
-            $ptr = $phpcsFile->findEndOfStatement($namespacePtr);
-            $phpcsFile->fixer->addNewline($ptr);
+        $isBracketed = false;
+        $scopeOpener = null;
+        if (isset($namespaceToken['scope_opener'])) {
+            $isBracketed = true;
+            $scopeOpener = $namespaceToken['scope_opener'];
         }
 
-        $content = '';
+        $namespaceEnd = $phpcsFile->findEndOfStatement($namespacePosition);
+        $searchEnd = $isBracketed ? $scopeOpener : $namespaceEnd;
+        $lastUseFunctionEnd = UseStatement::findLastUseAfterNamespace(
+            $phpcsFile,
+            $searchEnd
+        );
+        $lastUseEnd = UseStatement::findLastUseFunctionAfterNamespace(
+            $phpcsFile,
+            $searchEnd
+        );
+        if ($lastUseEnd === null) {
+            $lastUseEnd = $lastUseFunctionEnd;
+        }
+
+        $insertAt = ($lastUseEnd ?? $searchEnd) + 1;
+
+        $eol = $phpcsFile->eolChar;
+        $importStatements = [];
+
         foreach ($functionNames as $functionName) {
-            $content .= sprintf('%suse function %s;', $phpcsFile->eolChar, $functionName);
+            $importStatements[] = sprintf('use function %s;', $functionName);
         }
 
-        $phpcsFile->fixer->addContent($ptr, $content);
+        $fullImportBlock = implode($eol, $importStatements);
 
+        $prevLine = $phpcsFile->findPrevious([T_WHITESPACE], $insertAt - 1, null, true);
+        if (
+            $lastUseFunctionEnd === null
+            && $prevLine !== false
+            && $tokens[$insertAt]['line'] - $tokens[$prevLine]['line'] <= 1
+        ) {
+            $fullImportBlock = $eol . $fullImportBlock;
+        }
+
+        $nextLine = $phpcsFile->findNext([T_WHITESPACE], $insertAt, null, true);
+        if ($nextLine !== false && $tokens[$nextLine]['line'] > $tokens[$insertAt]['line'] + 1) {
+            $fullImportBlock .= $eol;
+        } else {
+            $fullImportBlock .= $eol . $eol;
+        }
+
+        $phpcsFile->fixer->addContent($insertAt, $fullImportBlock);
         $phpcsFile->fixer->endChangeset();
     }
 }

@@ -1,14 +1,18 @@
 <?php
 
 namespace A {
+
 use function Count;
 use function range;
+
     $arr = range(1, 10);
     $count = Count($arr);
 }
 
 namespace B {
+
 use function count;
+
     use function \range;
 
     $arr = range(1, 10);
@@ -16,7 +20,9 @@ use function count;
 }
 
 namespace C {
+
 use function count;
+
     use function range;
 
     $arr = range(1, 10);
@@ -24,7 +30,9 @@ use function count;
 }
 
 namespace D {
+
 use function Count;
+
     use function Range;
 
     $arr = Range(1, 10);
@@ -32,7 +40,9 @@ use function Count;
 }
 
 namespace E {
+
 use function range;
+
     use function A\count;
 
     $arr = range(1, 10);
@@ -42,7 +52,9 @@ use function range;
 }
 
 namespace F {
+
 use function range;
+
     use function array_keys as count;
 
     $arr = range(1, 10);
@@ -51,7 +63,9 @@ use function range;
 }
 
 namespace G {
+
 use function range;
+
     use DateTime;
 
     $arr = range(1, 10);

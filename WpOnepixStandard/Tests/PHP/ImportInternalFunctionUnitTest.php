@@ -60,7 +60,7 @@ final class ImportInternalFunctionUnitTest extends AbstractSniffUnitTest
                 ];
             case 'ImportInternalFunctionUnitTest.6.inc':
                 return [
-                    7 => 1,
+                    11 => 1,
                 ];
         }
 
