@@ -157,6 +157,7 @@ final class ImportInternalFunctionSniff implements Sniff
             || $tokens[$prev]['code'] === T_STRING
             || $tokens[$prev]['code'] === T_DOUBLE_COLON
             || $tokens[$prev]['code'] === T_OBJECT_OPERATOR
+            || $tokens[$prev]['code'] === T_NULLSAFE_OBJECT_OPERATOR
         ) {
             return null;
         }

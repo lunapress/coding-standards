@@ -70,23 +70,4 @@ final class UseStatement
 
         return $lastUseFunctionEnd;
     }
-
-    public static function findLastUseFunctionInScope(File $phpcsFile, int $scopeOpener, int $scopeCloser): ?int
-    {
-        /** @var array<int, array{code: int, content?: string, comment_closer?: int, scope_opener?: int, scope_closer?: int}> $tokens */
-        $tokens = $phpcsFile->getTokens();
-        $lastUse = null;
-
-        for ($i = $scopeOpener + 1; $i < $scopeCloser; $i++) {
-            if ($tokens[$i]['code'] === T_USE) {
-                // Check if it's a function use statement
-                $nextToken = $phpcsFile->findNext(T_WHITESPACE, $i + 1, null, true);
-                if ($tokens[$nextToken]['code'] === T_FUNCTION) {
-                    $lastUse = $phpcsFile->findEndOfStatement($i);
-                }
-            }
-        }
-
-        return $lastUse;
-    }
 }
