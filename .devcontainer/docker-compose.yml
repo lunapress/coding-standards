@@ -1,8 +1,8 @@
 name: onepix-wp-coding-standards
 
 services:
-    php:
-        build:
-            context: .
-        volumes:
-            - './php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini'
+  php:
+    build:
+      context: .
+    volumes:
+      - './php/xdebug.ini:/usr/local/etc/php/conf.d/xdebug.ini'
