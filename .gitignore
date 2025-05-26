@@ -7,7 +7,6 @@
 /.idea/*
 !/.idea/vcs.xml
 !/.idea/codeception.xml
-!/.idea/modules.xml
 !/.idea/phpunit.xml
 !/.idea/codeStyles/
 !/.idea/inspectionProfiles/
