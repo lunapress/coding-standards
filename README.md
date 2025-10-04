@@ -1,5 +1,5 @@
 <p align="left">
-    <img src="https://img.shields.io/badge/PHP-%3E%3D8.1-8892BF?logo=php"  alt="PHP Version"/>
+    <img src="https://img.shields.io/badge/PHP-%3E%3D8.3-8892BF?logo=php"  alt="PHP Version"/>
     <img src="https://github.com/onepixnet/wp-coding-standards/actions/workflows/unit-tests.yml/badge.svg" alt="PHPUnit Tests Status"/>
     <img src="https://coveralls.io/repos/github/onepixnet/wp-coding-standards/badge.svg?branch=main"  alt="Coverage"/>
     <img src="https://img.shields.io/badge/psalm-level%201-blue"  alt="Psalm level"/>
