@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 namespace WpOnepixStandard\Sniffs\Declarations;
 
+use Override;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
 final class StrictTypesSniff implements Sniff
 {
-    private const ERROR_MESSAGE = 'declare(strict_types=1); required';
-    private const STRICT_TYPES_VALUE = '1';
+    private const string ERROR_MESSAGE = 'declare(strict_types=1); required';
+    private const string STRICT_TYPES_VALUE = '1';
 
     /**
      * @return array<int> Array of tokens to listen for
      */
-    #[\Override]
+    #[Override]
     public function register(): array
     {
         return [T_OPEN_TAG];
@@ -25,7 +26,7 @@ final class StrictTypesSniff implements Sniff
      * @param File $phpcsFile The file being scanned
      * @param int $stackPtr The position in the stack where the token was found
      */
-    #[\Override]
+    #[Override]
     public function process(File $phpcsFile, $stackPtr): void
     {
         // Check if PHP open tag is the first token in file

@@ -12,7 +12,7 @@
     </coverage>
     <testsuites>
         <testsuite name="Onepix CodeSniffer Test Suite">
-            <directory suffix="Test.php">WpOnepixStandard/Tests</directory>
+            <directory>WpOnepixStandard/Tests</directory>
         </testsuite>
     </testsuites>
     <logging/>

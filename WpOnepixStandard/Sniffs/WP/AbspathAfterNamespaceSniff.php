@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace WpOnepixStandard\Sniffs\WP;
 
+use Override;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 
@@ -27,13 +28,13 @@ final class AbspathAfterNamespaceSniff implements Sniff
         T_SEMICOLON
     ];
 
-    #[\Override]
+    #[Override]
     public function register(): array
     {
         return [T_NAMESPACE];
     }
 
-    #[\Override]
+    #[Override]
     public function process(
         File $phpcsFile,
         $stackPtr

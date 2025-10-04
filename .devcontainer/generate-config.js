@@ -32,9 +32,7 @@ const config = {
     service: "php",
     customizations: {
         jetbrains: {
-            plugins: [
-                'com.codeium.intellij',
-            ]
+            plugins: []
         },
     },
     mounts,
