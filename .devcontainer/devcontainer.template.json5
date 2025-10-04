@@ -1,0 +1,14 @@
+{
+    name: 'Onepix WP Coding Standards',
+    dockerComposeFile: [
+        "./docker-compose.yml"
+    ],
+    service: "php",
+    customizations: {
+        jetbrains: {
+            plugins: []
+        },
+    },
+    mounts: [],
+    postCreateCommand: "composer install"
+}
