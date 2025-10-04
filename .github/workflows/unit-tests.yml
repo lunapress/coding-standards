@@ -11,14 +11,14 @@ jobs:
   unit-tests:
     strategy:
       matrix:
-        php: ["8.1", "8.2", "8.3"]
+        php: ["8.3", "8.4"]
     uses: ./.github/workflows/php-base.yml
     with:
       php-version: ${{ matrix.php }}
       command: composer tests
       coverage: 'xdebug'
       artifact-path: 'coverage-unit.xml'
-      php-version-artifact: '8.1'
+      php-version-artifact: '8.3'
 
   coverage:
     needs: unit-tests
@@ -29,7 +29,7 @@ jobs:
       - name: Download coverage artifacts
         uses: actions/download-artifact@v4
         with:
-          name: coverage-8.1
+          name: coverage-8.3
 
       - name: Upload coverage to Coveralls
         uses: coverallsapp/github-action@v2

@@ -35,8 +35,11 @@ foreach ($testFiles as $file) {
 
         $fullClassName = $namespace ? $namespace . '\\' . $className : $className;
 
-        $standardDirs[$fullClassName] = $srcPath;
-        $testDirs[$fullClassName] = $testPath;
+        $srcReal  = realpath($srcPath);
+        $testReal = realpath($testPath);
+
+        $standardDirs[$fullClassName] = ($srcReal === false ? $srcPath : $srcReal) . DIRECTORY_SEPARATOR;
+        $testDirs[$fullClassName]     = ($testReal === false ? $testPath : $testReal) . DIRECTORY_SEPARATOR;
     }
 }
 
