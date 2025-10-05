@@ -71,8 +71,6 @@
 
     <rule ref="PSR12"/>
 
-    <rule ref="Squiz.NamingConventions.ValidVariableName"/>
-
     <!-- Return the bracket to the class with a new line -->
     <rule ref="PSR2.Classes.ClassDeclaration.OpenBraceNewLine">
         <severity>5</severity>
