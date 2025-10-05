@@ -81,6 +81,11 @@
         <severity>5</severity>
     </rule>
 
+    <!-- Allow ABSPATH verification -->
+    <rule ref="PSR1.Files.SideEffects">
+        <severity>0</severity>
+    </rule>
+
     <!-- Arguments -->
     <arg name="extensions" value="php" />
     <arg name="report" value="summary" />
