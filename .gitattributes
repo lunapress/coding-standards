@@ -1,9 +1,12 @@
 /.devcontainer export-ignore
+/.github export-ignore
 /tests export-ignore
+/stubs export-ignore
 /.idea export-ignore
 /.gitattributes export-ignore
 /.gitignore export-ignore
 /.editorconfig export-ignore
 /phpunit.xml.dist export-ignore
 /phpunit.xml export-ignore
-/ruleset.xml export-ignore
+/psalm.xml export-ignore
+/phpcs.xml export-ignore
