@@ -1,17 +1,18 @@
 {
-    "name": "onepix/wp-coding-standards",
+    "name": "lunapress/coding-standards",
     "type": "phpcodesniffer-standard",
-    "description": "PHP_CodeSniffer rules (sniffs) to enforce WordPress coding conventions",
+    "description": "PHP_CodeSniffer rules (sniffs) for LunaPress",
     "license": "MIT",
     "keywords": [
         "phpcs",
         "standards",
         "static analysis",
-        "WordPress"
+        "WordPress",
+        "LunaPress"
     ],
     "autoload": {
         "psr-4": {
-            "WpOnepixStandard\\": "WpOnepixStandard/"
+            "LunaPressStandard\\": "LunaPressStandard/"
         }
     },
     "autoload-dev": {
@@ -21,10 +22,14 @@
     },
     "authors": [
         {
-            "name": "onepix"
+            "name": "Onepix",
+            "homepage": "https://onepix.net",
+            "role": "Company"
         },
         {
-            "name": "0zd0"
+            "name": "0zd0",
+            "role": "Lead Developer",
+            "homepage": "https://github.com/0zd0"
         }
     ],
     "repositories": [
@@ -58,7 +63,7 @@
 
         "fix:cs": "phpcbf",
 
-        "tests:unit": "phpunit -c phpunit.xml --coverage-filter WpOnepixStandard --coverage-clover=coverage-unit.xml",
+        "tests:unit": "phpunit -c phpunit.xml --coverage-filter LunaPressStandard --coverage-clover=coverage-unit.xml",
         "tests": [
             "@tests:unit"
         ]

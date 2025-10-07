@@ -11,8 +11,8 @@
         </report>
     </coverage>
     <testsuites>
-        <testsuite name="Onepix CodeSniffer Test Suite">
-            <directory>WpOnepixStandard/Tests</directory>
+        <testsuite name="LunaPress CodeSniffer Test Suite">
+            <directory>LunaPressStandard/Tests</directory>
         </testsuite>
     </testsuites>
     <logging/>

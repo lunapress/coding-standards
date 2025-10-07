@@ -11,8 +11,8 @@ $sniffCodes = [];
 /** @var array<string, bool> $fixableCodes */
 $fixableCodes = [];
 
-$srcPath = __DIR__ . '/../WpOnepixStandard/';
-$testPath = __DIR__ . '/../WpOnepixStandard/Tests/';
+$srcPath = __DIR__ . '/../LunaPressStandard/';
+$testPath = __DIR__ . '/../LunaPressStandard/Tests/';
 
 $allTestFiles = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($testPath));
 $testFiles = new RegexIterator($allTestFiles, '/Test\.php$/');

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WpOnepixStandard\Tests\Declarations;
+namespace LunaPressStandard\Tests\Declarations;
 
 use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
-use WpOnepixStandard\Sniffs\Declarations\StrictTypesSniff;
-use WpOnepixStandard\Tests\CustomAbstractSniffUnitTestCase;
+use LunaPressStandard\Sniffs\Declarations\StrictTypesSniff;
+use LunaPressStandard\Tests\CustomAbstractSniffUnitTestCase;
 
 #[CoversClass(StrictTypesSniff::class)]
 final class StrictTypesUnitTest extends CustomAbstractSniffUnitTestCase

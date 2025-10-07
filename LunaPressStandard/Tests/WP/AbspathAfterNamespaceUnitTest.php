@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace WpOnepixStandard\Tests\WP;
+namespace LunaPressStandard\Tests\WP;
 
 use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
-use WpOnepixStandard\Sniffs\WP\AbspathAfterNamespaceSniff;
-use WpOnepixStandard\Tests\CustomAbstractSniffUnitTestCase;
+use LunaPressStandard\Sniffs\WP\AbspathAfterNamespaceSniff;
+use LunaPressStandard\Tests\CustomAbstractSniffUnitTestCase;
 
 #[CoversClass(AbspathAfterNamespaceSniff::class)]
 final class AbspathAfterNamespaceUnitTest extends CustomAbstractSniffUnitTestCase

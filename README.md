@@ -8,23 +8,23 @@
 </p>
 
 
-# WP Coding Standards
+# LunaPress Coding Standards
 
 Based on [wp-coding-standards/wpcs](https://github.com/WordPress/WordPress-Coding-Standards).
 
 - Declarations Sniffs
-  - [WpOnepixStandard.Declarations.StrictTypes](#wponepixstandarddeclarationsstricttypes)
+  - [LunaPressStandard.Declarations.StrictTypes](#lunapressdeclarationsstricttypes)
 - WP Sniffs
-  - [WpOnepixStandard.WP.AbspathAfterNamespace](#wponepixstandardwpabspathafternamespace)
+  - [LunaPressStandard.WP.AbspathAfterNamespace](#lunapresswpabspathafternamespace)
 
 ## Declarations Sniffs
 
-### WpOnepixStandard.Declarations.StrictTypes
+### LunaPressStandard.Declarations.StrictTypes
 
 Checks for mandatory `declare(strict_types=1);` after `<?php`. Takes into account other parameters besides `strict_types`
 
 ## WP Sniffs
 
-### WpOnepixStandard.WP.AbspathAfterNamespace
+### LunaPressStandard.WP.AbspathAfterNamespace
 
 Looking for a mandatory `defined('ABSPATH') || exit;` check after `namespace` so that you can't go to the file directly from the url

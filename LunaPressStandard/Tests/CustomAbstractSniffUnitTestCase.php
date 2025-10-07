@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WpOnepixStandard\Tests;
+namespace LunaPressStandard\Tests;
 
 use Override;
 use PHP_CodeSniffer\Tests\Standards\AbstractSniffUnitTest;

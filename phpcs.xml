@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<ruleset name="WpOnepixStandard">
+<ruleset name="LunaPressStandard">
     <rule ref="PSR12"/>
 
-    <file>./WpOnepixStandard</file>
+    <file>./LunaPressStandard</file>
     <file>./tests</file>
 
     <exclude-pattern>*/Tests/*/*.inc</exclude-pattern>

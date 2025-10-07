@@ -4,6 +4,7 @@
     <option name="directories">
       <list>
         <option value="$PROJECT_DIR$/WpOnepixStandard/Tests" />
+        <option value="$PROJECT_DIR$/LunaPressStandard/Tests" />
       </list>
     </option>
   </component>

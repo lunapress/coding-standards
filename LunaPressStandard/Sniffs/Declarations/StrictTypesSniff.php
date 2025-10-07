@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace WpOnepixStandard\Sniffs\Declarations;
+namespace LunaPressStandard\Sniffs\Declarations;
 
 use Override;
 use PHP_CodeSniffer\Files\File;

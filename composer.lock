@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1932ed64150ae5f1ee910ce166df0216",
+    "content-hash": "cc7d0f7e6d8052b7900a466a0a11073a",
     "packages": [
         {
             "name": "dealerdirect/phpcodesniffer-composer-installer",
@@ -282,7 +282,7 @@
             "version": "3.x-dev",
             "source": {
                 "type": "git",
-                "url": "git@github.com:0zd0/PHP_CodeSniffer.git",
+                "url": "https://github.com/0zd0/PHP_CodeSniffer.git",
                 "reference": "bb6632b8ff63be310b9f1a938bdd04a235b95500"
             },
             "dist": {
@@ -363,7 +363,7 @@
                 "source": "https://github.com/PHPCSStandards/PHP_CodeSniffer",
                 "security": "https://github.com/PHPCSStandards/PHP_CodeSniffer/security/policy"
             },
-            "time": "2025-10-04T01:46:31+00:00"
+            "time": "2025-10-04T02:08:17+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
