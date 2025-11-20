@@ -84,6 +84,11 @@
         <severity>0</severity>
     </rule>
 
+    <!--  Allow static signatures in final classes due to interface  -->
+    <rule ref="Universal.CodeAnalysis.StaticInFinalClass">
+        <severity>0</severity>
+    </rule>
+
     <!-- Arguments -->
     <arg name="extensions" value="php" />
     <arg name="report" value="summary" />
