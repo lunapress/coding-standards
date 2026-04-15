@@ -65,6 +65,9 @@
 
         <exclude name="WordPress.NamingConventions"/>
         <exclude name="PEAR"/>
+
+        <!-- Shifts are not recommended due to git history -->
+        <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
     </rule>
 
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
