@@ -10,21 +10,15 @@
 
 # LunaPress Coding Standards
 
-Based on [wp-coding-standards/wpcs](https://github.com/WordPress/WordPress-Coding-Standards).
+Based on [wp-coding-standards/wpcs](https://github.com/WordPress/WordPress-Coding-Standards) & [slevomat/coding-standard](https://github.com/slevomat/coding-standard)
 
-- Declarations Sniffs
-  - [LunaPressStandard.Declarations.StrictTypes](#lunapressdeclarationsstricttypes)
 - WP Sniffs
-  - [LunaPressStandard.WP.AbspathAfterNamespace](#lunapresswpabspathafternamespace)
+  - [LunaPressStandard.WP.ProceduralAbspath](#lunapressstandardwpproceduralabspath)
 
 ## Declarations Sniffs
 
-### LunaPressStandard.Declarations.StrictTypes
-
-Checks for mandatory `declare(strict_types=1);` after `<?php`. Takes into account other parameters besides `strict_types`
-
 ## WP Sniffs
 
-### LunaPressStandard.WP.AbspathAfterNamespace
+### LunaPressStandard.WP.ProceduralAbspath
 
-Looking for a mandatory `defined('ABSPATH') || exit;` check after `namespace` so that you can't go to the file directly from the url
+Mandatory check `defined('ABSPATH') || exit;` is required in regular PHP files without PSR-4
