@@ -6,11 +6,11 @@ namespace LunaPressStandard\Tests\WP;
 
 use Override;
 use PHPUnit\Framework\Attributes\CoversClass;
-use LunaPressStandard\Sniffs\WP\AbspathAfterNamespaceSniff;
+use LunaPressStandard\Sniffs\WP\ProceduralAbspathSniff;
 use LunaPressStandard\Tests\CustomAbstractSniffUnitTestCase;
 
-#[CoversClass(AbspathAfterNamespaceSniff::class)]
-final class AbspathAfterNamespaceUnitTest extends CustomAbstractSniffUnitTestCase
+#[CoversClass(ProceduralAbspathSniff::class)]
+final class ProceduralAbspathUnitTest extends CustomAbstractSniffUnitTestCase
 {
     #[Override]
     public function getWarningList(): array
@@ -22,11 +22,8 @@ final class AbspathAfterNamespaceUnitTest extends CustomAbstractSniffUnitTestCas
     protected function getErrorList(string $testFile = ''): array
     {
         return match ($testFile) {
-            'AbspathAfterNamespaceUnitTest.1.inc', => [
-                3 => 1
-            ],
-            'AbspathAfterNamespaceUnitTest.3.inc', => [
-                4 => 1
+            'ProceduralAbspathUnitTest.1.inc', 'ProceduralAbspathUnitTest.2.inc', => [
+                1 => 1
             ],
             default => [],
         };
